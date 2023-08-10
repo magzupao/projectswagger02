@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  title: Employee API
+  version: 1.0.0
+paths:
+  /employees:
+    get:
+      summary: Obtener todos los empleados
+      responses:
+        '200':
+          description: Lista de empleados
+    post:
+      summary: Crear un nuevo empleado
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+              required:
+                - email
+                - first_name
+                - last_name
+      responses:
+        '201':
+          description: Empleado creado exitosamente
+
+  /employees/{employeeId}:
+    get:
+      summary: Obtener un empleado por ID
+      parameters:
+        - name: employeeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalles del empleado
+        '404':
+          description: Empleado no encontrado
+
+    put:
+      summary: Actualizar un empleado por ID
+      parameters:
+        - name: employeeId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+              required:
+                - email
+                - first_name
+                - last_name
+      responses:
+        '200':
+          description: Empleado actualizado exitosamente
+        '404':
+          description: Empleado no encontrado
+
+    delete:
+      summary: Eliminar un empleado por ID
+      parameters:
+        - name: employeeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Empleado eliminado exitosamente
+        '404':
+          description: Empleado no encontrado
